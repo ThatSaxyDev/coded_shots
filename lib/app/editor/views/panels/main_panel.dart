@@ -17,7 +17,7 @@ class MainPanel extends ConsumerWidget {
     return Expanded(
       child: Container(
         height: height(context),
-        decoration: const BoxDecoration(color: b200),
+        decoration: const BoxDecoration(color: b100),
         child: SingleChildScrollView(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

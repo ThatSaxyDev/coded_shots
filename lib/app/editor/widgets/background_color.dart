@@ -1,17 +1,27 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
+import 'package:coded_shots/app/editor/widgets/color_palette.dart';
+import 'package:coded_shots/app/editor/widgets/pop_up.dart';
 import 'package:coded_shots/data/editor_presets.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/shared/widgets/custom_flex.dart';
 import 'package:coded_shots/theme/palette.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
-class BackgroundColor extends ConsumerWidget {
+class BackgroundColor extends ConsumerStatefulWidget {
   const BackgroundColor({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _BackgroundColorState();
+}
+
+class _BackgroundColorState extends ConsumerState<BackgroundColor> {
+  bool showModal = false;
+  @override
+  Widget build(BuildContext context) {
     final editorState = ref.watch(editorNotifierProvider);
     final editorStateNotifier = ref.read(editorNotifierProvider.notifier);
     return Row(
@@ -25,20 +35,30 @@ class BackgroundColor extends ConsumerWidget {
           width: 150,
           height: 35,
           decoration: BoxDecoration(
-            color: b200,
+            color: b100,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Center(
-            child: Container(
-              width: 145,
-              height: 25,
-              decoration: BoxDecoration(
-                color: editorState.backgroundColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ).tap(onTap: () {
-              editorStateNotifier.changeColorRandom();
-            }),
+          child: PopUpOverlay(
+            visible: showModal,
+            modal: ColorPalette(
+              close: () {
+                setState(() => showModal = false);
+              },
+            ),
+            onClose: () => setState(() => showModal = false),
+            child: Center(
+              child: Container(
+                width: 145,
+                height: 25,
+                decoration: BoxDecoration(
+                  color: editorState.backgroundColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ).tap(onTap: () {
+                // editorStateNotifier.changeColorRandom();
+                setState(() => showModal = true);
+              }),
+            ),
           ),
         ),
       ],

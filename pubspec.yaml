@@ -30,6 +30,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   cool_dropdown: ^2.1.0
   gap: ^3.0.1
+  flutter_portal: ^1.1.4
 
 dev_dependencies:
   flutter_test:

@@ -25,7 +25,7 @@ class PaddingSelector extends ConsumerWidget {
           width: 150,
           height: 35,
           decoration: BoxDecoration(
-            color: b200,
+            color: b100,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Stack(

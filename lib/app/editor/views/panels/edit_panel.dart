@@ -20,7 +20,7 @@ class EditPanel extends ConsumerWidget {
     return Container(
       width: 270,
       height: height(context),
-      decoration: const BoxDecoration(color: b100),
+      decoration: const BoxDecoration(color: b200),
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

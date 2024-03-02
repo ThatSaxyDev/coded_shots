@@ -1,5 +1,6 @@
 import 'package:coded_shots/app/editor/views/editor_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -15,14 +16,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Coded Shots',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
-        useMaterial3: true,
+    return Portal(
+      child: MaterialApp(
+        title: 'Coded Shots',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const EditorView(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: const EditorView(),
     );
   }
 }
