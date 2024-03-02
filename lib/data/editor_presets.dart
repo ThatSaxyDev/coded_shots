@@ -34,3 +34,279 @@ List<Color> backgroundColors = const [
   Color(0xFF21d5b8),
   Color(0xFF06535d),
 ];
+
+enum ShadowPreset {
+  none(0),
+  small(5),
+  medium(12),
+  large(25);
+
+  const ShadowPreset(this.value);
+  final double value;
+}
+
+List<LinearGradient> backgroundGradients = [
+  // Gradient 1
+  LinearGradient(
+    colors: [
+      backgroundColors[0],
+      backgroundColors[5],
+      backgroundColors[10],
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  ),
+  // Gradient 2
+  LinearGradient(
+    colors: [
+      backgroundColors[2],
+      backgroundColors[15],
+      backgroundColors[20],
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  ),
+  // Gradient 3
+  LinearGradient(
+    colors: [
+      backgroundColors[7],
+      backgroundColors[12],
+    ],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  ),
+  // Gradient 4
+  LinearGradient(
+    colors: [
+      backgroundColors[17],
+      backgroundColors[22],
+    ],
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+  ),
+  // Gradient 5
+  LinearGradient(
+    colors: [
+      backgroundColors[3],
+      backgroundColors[8],
+      backgroundColors[19],
+    ],
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+  ),
+  // Gradient 6
+  LinearGradient(
+    colors: [
+      backgroundColors[6],
+      backgroundColors[11],
+    ],
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+  ),
+  // Gradient 7
+  LinearGradient(
+    colors: [
+      backgroundColors[13],
+      backgroundColors[18],
+      backgroundColors[23],
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  ),
+  // Gradient 8
+  LinearGradient(
+    colors: [
+      backgroundColors[1],
+      backgroundColors[14],
+    ],
+    begin: Alignment.bottomLeft,
+    end: Alignment.topRight,
+  ),
+  // Gradient 9
+  LinearGradient(
+    colors: [
+      backgroundColors[4],
+      backgroundColors[9],
+      backgroundColors[24],
+    ],
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+  ),
+  // Gradient 10
+  LinearGradient(
+    colors: [
+      backgroundColors[16],
+      backgroundColors[21],
+    ],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  ),
+  // Gradient 11
+  LinearGradient(
+    colors: [
+      backgroundColors[25],
+      backgroundColors[0],
+    ],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  ),
+  // Gradient 12
+  LinearGradient(
+    colors: [
+      backgroundColors[10],
+      backgroundColors[20],
+    ],
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+  ),
+  // Gradient 13
+  LinearGradient(
+    colors: [
+      backgroundColors[5],
+      backgroundColors[15],
+      backgroundColors[22],
+    ],
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+  ),
+  // Gradient 14
+  LinearGradient(
+    colors: [
+      backgroundColors[2],
+      backgroundColors[7],
+    ],
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+  ),
+  // Gradient 15
+  LinearGradient(
+    colors: [
+      backgroundColors[12],
+      backgroundColors[17],
+      backgroundColors[23],
+    ],
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+  ),
+  // Gradient 16
+  LinearGradient(
+    colors: [
+      backgroundColors[3],
+      backgroundColors[8],
+    ],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  ),
+  // Gradient 17
+  LinearGradient(
+    colors: [
+      backgroundColors[18],
+      backgroundColors[25],
+    ],
+    begin: Alignment.bottomLeft,
+    end: Alignment.topRight,
+  ),
+  // Gradient 18
+  LinearGradient(
+    colors: [
+      backgroundColors[11],
+      backgroundColors[21],
+      backgroundColors[4],
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  ),
+  // Gradient 19
+  LinearGradient(
+    colors: [
+      backgroundColors[1],
+      backgroundColors[9],
+    ],
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+  ),
+  // Gradient 20
+  LinearGradient(
+    colors: [
+      backgroundColors[19],
+      backgroundColors[13],
+      backgroundColors[6],
+    ],
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+  ),
+  // Gradient 21
+  LinearGradient(
+    colors: [
+      backgroundColors[14],
+      backgroundColors[24],
+    ],
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+  ),
+  // Gradient 22
+  LinearGradient(
+    colors: [
+      backgroundColors[16],
+      backgroundColors[20],
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  ),
+  // Gradient 23
+  LinearGradient(
+    colors: [
+      backgroundColors[0],
+      backgroundColors[10],
+    ],
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+  ),
+  // Gradient 24
+  LinearGradient(
+    colors: [
+      backgroundColors[7],
+      backgroundColors[22],
+      backgroundColors[3],
+    ],
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+  ),
+  // Gradient 25
+  LinearGradient(
+    colors: [
+      backgroundColors[5],
+      backgroundColors[15],
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  ),
+  // Gradient 26
+  LinearGradient(
+    colors: [
+      backgroundColors[8],
+      backgroundColors[17],
+      backgroundColors[18],
+    ],
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+  ),
+  // Gradient 27
+  LinearGradient(
+    colors: [
+      backgroundColors[25],
+      backgroundColors[21],
+    ],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  ),
+  // Gradient 28
+  LinearGradient(
+    colors: [
+      backgroundColors[9],
+      backgroundColors[12],
+    ],
+    begin: Alignment.topRight,
+    end: Alignment.centerRight,
+  ),
+];

@@ -8,12 +8,16 @@ class PopUpOverlay extends StatelessWidget {
     required this.onClose,
     required this.modal,
     required this.child,
+    this.follower = Alignment.topLeft,
+    this.target = Alignment.topRight,
   }) : super(key: key);
 
   final Widget child;
   final Widget modal;
   final bool visible;
   final VoidCallback onClose;
+  final Alignment follower;
+  final Alignment target;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +25,9 @@ class PopUpOverlay extends StatelessWidget {
       visible: visible,
       onClose: onClose,
       child: PortalTarget(
-        anchor: const Aligned(
-          follower: Alignment.topLeft,
-          target: Alignment.topRight,
+        anchor:  Aligned(
+          follower: follower,
+          target: target,
         ),
         visible: visible,
         closeDuration: kThemeAnimationDuration,
@@ -72,7 +76,9 @@ class Barrier extends StatelessWidget {
           duration: kThemeAnimationDuration,
           tween: ColorTween(
             begin: Colors.transparent,
-            end: visible ? Colors.black12 : Colors.transparent,
+            end: 
+            // visible ? Colors.black12 :
+             Colors.transparent,
           ),
           builder: (context, color, child) {
             return ColoredBox(color: color);

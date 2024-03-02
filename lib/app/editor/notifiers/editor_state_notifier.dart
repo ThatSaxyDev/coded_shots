@@ -1,8 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:math';
 
-import 'package:coded_shots/data/editor_presets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:coded_shots/data/editor_presets.dart';
 
 class EditorStateNotifier extends Notifier<EditorState> {
   @override
@@ -10,8 +12,8 @@ class EditorStateNotifier extends Notifier<EditorState> {
         padding: 8,
         radius: 0,
         visible: true,
-        backgroundColor: Colors.purple,
-        backgroundGradient: defaultGradient,
+        backgroundColor: const Color(0xFF7e3bdf),
+        shadow: ShadowPreset.none,
       );
 
   void changePadding({required double newPadding}) {
@@ -27,7 +29,14 @@ class EditorStateNotifier extends Notifier<EditorState> {
   }
 
   void changeColor({required Color newColor}) {
-    state = state.copyWith(backgroundColor: newColor);
+    state = state.copyWith(
+      backgroundColor: newColor,
+    );
+    state.backgroundGradient = null;
+  }
+
+  void changeGradient({required Gradient newGradient}) {
+    state = state.copyWith(backgroundGradient: newGradient);
   }
 
   void changeColorRandom() {
@@ -36,6 +45,10 @@ class EditorStateNotifier extends Notifier<EditorState> {
         backgroundColors[random.nextInt(backgroundColors.length)];
     state = state.copyWith(backgroundColor: randomColor);
   }
+
+  void changeShadow({required ShadowPreset newShadow}) {
+    state = state.copyWith(shadow: newShadow);
+  }
 }
 
 class EditorState {
@@ -43,14 +56,16 @@ class EditorState {
   final double radius;
   final bool visible;
   final Color backgroundColor;
-  final Gradient backgroundGradient;
+  Gradient? backgroundGradient;
+  final ShadowPreset shadow;
 
-  const EditorState({
+  EditorState({
     required this.padding,
     required this.radius,
     required this.visible,
     required this.backgroundColor,
-    required this.backgroundGradient,
+    this.backgroundGradient,
+    required this.shadow,
   });
 
   EditorState copyWith({
@@ -59,6 +74,7 @@ class EditorState {
     bool? visible,
     Color? backgroundColor,
     Gradient? backgroundGradient,
+    ShadowPreset? shadow,
   }) {
     return EditorState(
       padding: padding ?? this.padding,
@@ -66,6 +82,7 @@ class EditorState {
       visible: visible ?? this.visible,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       backgroundGradient: backgroundGradient ?? this.backgroundGradient,
+      shadow: shadow ?? this.shadow,
     );
   }
 }

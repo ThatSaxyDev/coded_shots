@@ -1,7 +1,9 @@
 import 'package:coded_shots/shared/app_constants.dart';
 import 'package:coded_shots/theme/palette.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:intl/intl.dart';
 
 extension ResponsiveExt on num {
   double rW(BuildContext context) => (this * width(context)) / 1440;
@@ -44,9 +46,23 @@ extension StyledTextExtension on String {
   }
 }
 
+extension StringCasingExtension on String {
+  String? camelCase() => toBeginningOfSentenceCase(this);
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
+  String? trimToken() => contains(":") ? split(":")[1].trim() : this;
+  String? trimSpaces() => replaceAll(" ", "");
+  String removeSpacesAndLower() => replaceAll(' ', '').toLowerCase();
+}
+
 extension InkWellExtension on Widget {
   InkWell tap({
     required GestureTapCallback? onTap,
+    Function(bool)? onHover,
     GestureTapCallback? onDoubleTap,
     GestureLongPressCallback? onLongPress,
     BorderRadius? borderRadius,
@@ -60,6 +76,7 @@ extension InkWellExtension on Widget {
       borderRadius: borderRadius ?? BorderRadius.circular(12),
       splashColor: splashColor,
       highlightColor: highlightColor,
+      onHover: onHover,
       child: this,
     );
   }
@@ -175,4 +192,12 @@ extension WidgetAnimation on Widget {
         duration: animatiomDuration ?? 500.ms,
         curve: curve ?? Curves.decelerate,
       );
+}
+
+extension Log on Object {
+  void log() {
+    if (kDebugMode) {
+      print(toString());
+    }
+  }
 }

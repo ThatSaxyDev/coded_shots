@@ -24,6 +24,23 @@ class _ColorPaletteState extends ConsumerState<ColorPalette> {
   final PageController pageController = PageController();
   int view = 0;
 
+  void getPage() async {
+    await Future.delayed(50.ms);
+    final editorState = ref.read(editorNotifierProvider);
+    if (editorState.backgroundGradient != null) {
+      pageController.jumpToPage(
+        1,
+      );
+      setState(() => view = 1);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     final editorState = ref.watch(editorNotifierProvider);
@@ -157,8 +174,44 @@ class _ColorPaletteState extends ConsumerState<ColorPalette> {
                       ),
                     ),
                   ),
-                  Center(
-                    child: 'Coming soon'.txt(),
+
+                  //! gradients
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    child: Wrap(
+                      runAlignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      alignment: WrapAlignment.spaceEvenly,
+                      children: List.generate(
+                        backgroundColors.length,
+                        (index) => SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: Center(
+                            child: CircleAvatar(
+                              radius: 18.5,
+                              backgroundColor: backgroundGradients[index] ==
+                                      editorState.backgroundGradient
+                                  ? neutralWhite
+                                  : Colors.transparent,
+                              child: Center(
+                                child: Container(
+                                  height: 34,
+                                  width: 34,
+                                  decoration: BoxDecoration(
+                                    gradient: backgroundGradients[index],
+                                    borderRadius: BorderRadius.circular(34),
+                                  ),
+                                ).tap(onTap: () {
+                                  editorStateNotifier.changeGradient(
+                                      newGradient: backgroundGradients[index]);
+                                }),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

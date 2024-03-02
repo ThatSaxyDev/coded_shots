@@ -1,4 +1,5 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
+import 'package:coded_shots/app/editor/widgets/code_view.dart';
 import 'package:coded_shots/shared/app_constants.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/theme/palette.dart';
@@ -12,7 +13,7 @@ class MainPanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final editorState = ref.watch(editorNotifierProvider);
-    final editorStateNotifier = ref.read(editorNotifierProvider.notifier);
+    // final editorStateNotifier = ref.read(editorNotifierProvider.notifier);
 
     return Expanded(
       child: Container(
@@ -23,8 +24,8 @@ class MainPanel extends ConsumerWidget {
             scrollDirection: Axis.horizontal,
             child: AnimatedContainer(
               duration: 300.ms,
-              height: 400,
-              width: 400,
+              // height: 400,
+              // width: 400,
               padding: EdgeInsets.all(editorState.padding),
               margin: EdgeInsets.only(
                 top: 200.rH(context),
@@ -34,19 +35,11 @@ class MainPanel extends ConsumerWidget {
                 color: editorState.visible
                     ? editorState.backgroundColor
                     : Colors.transparent,
+                gradient: editorState.backgroundGradient,
                 borderRadius: BorderRadius.circular(editorState.radius),
               ),
-              child: Center(
-                child: AnimatedContainer(
-                  duration: 300.ms,
-                  height: double.infinity,
-                  width: double.infinity,
-                  padding: EdgeInsets.all(editorState.padding),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
+              child: const Center(
+                child: CodeView()
               ),
             ),
           ),

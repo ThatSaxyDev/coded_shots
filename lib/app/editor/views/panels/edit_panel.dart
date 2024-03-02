@@ -2,8 +2,8 @@ import 'package:coded_shots/app/editor/providers/editor_providers.dart';
 import 'package:coded_shots/app/editor/widgets/background_color.dart';
 import 'package:coded_shots/app/editor/widgets/padding_selector.dart';
 import 'package:coded_shots/app/editor/widgets/radius_selector.dart';
+import 'package:coded_shots/app/editor/widgets/shadow_selector.dart';
 import 'package:coded_shots/app/editor/widgets/visibility_selector.dart';
-import 'package:coded_shots/data/editor_presets.dart';
 import 'package:coded_shots/shared/app_constants.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/theme/palette.dart';
@@ -22,32 +22,45 @@ class EditPanel extends ConsumerWidget {
       height: height(context),
       decoration: const BoxDecoration(color: b200),
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Gap(10),
-          'Coded Shots'.txt(
-            size: 18,
-            fontWeight: FontWeight.w700,
-          ),
-          const Gap(30),
-
-          //! background edit
-          'Background'.txt(
-            size: 16,
-            fontWeight: FontWeight.w500,
-          ),
-          const Gap(15),
-          const PaddingSelector(),
-          const Gap(10),
-          const RadiusSelector(),
-          const Gap(10),
-          const VisibilitySelector(),
-          if (editorState.visible) ...[
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             const Gap(10),
-            const BackgroundColor(),
+            'Coded Shots'.txt(
+              size: 18,
+              fontWeight: FontWeight.w700,
+            ),
+            const Gap(30),
+
+            //! background edit
+            'Background'.txt(
+              size: 16,
+              fontWeight: FontWeight.w500,
+            ),
+            const Gap(15),
+            const PaddingSelector(),
+            const Gap(10),
+            const RadiusSelector(),
+            const Gap(10),
+            const VisibilitySelector(),
+            if (editorState.visible) ...[
+              const Gap(10),
+              const BackgroundColor(),
+            ],
+
+            const Gap(30),
+
+            //! foreground edit
+            'Foreground'.txt(
+              size: 16,
+              fontWeight: FontWeight.w500,
+            ),
+            const Gap(15),
+            const ShadowSelector(),
+            const Gap(10),
           ],
-        ],
+        ),
       ),
     );
   }

@@ -1,12 +1,8 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
 import 'package:coded_shots/app/editor/widgets/color_palette.dart';
 import 'package:coded_shots/app/editor/widgets/pop_up.dart';
-import 'package:coded_shots/data/editor_presets.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
-import 'package:coded_shots/shared/widgets/custom_flex.dart';
 import 'package:coded_shots/theme/palette.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +19,6 @@ class _BackgroundColorState extends ConsumerState<BackgroundColor> {
   @override
   Widget build(BuildContext context) {
     final editorState = ref.watch(editorNotifierProvider);
-    final editorStateNotifier = ref.read(editorNotifierProvider.notifier);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -51,11 +46,11 @@ class _BackgroundColorState extends ConsumerState<BackgroundColor> {
                 width: 145,
                 height: 25,
                 decoration: BoxDecoration(
+                  gradient: editorState.backgroundGradient,
                   color: editorState.backgroundColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
               ).tap(onTap: () {
-                // editorStateNotifier.changeColorRandom();
                 setState(() => showModal = true);
               }),
             ),
