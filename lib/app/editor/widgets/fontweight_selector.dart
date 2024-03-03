@@ -9,14 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-class ShadowSelector extends ConsumerStatefulWidget {
-  const ShadowSelector({super.key});
+class FontWeightSelector extends ConsumerStatefulWidget {
+  const FontWeightSelector({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ShadowSelectorState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _FontWeightSelectorState();
 }
 
-class _ShadowSelectorState extends ConsumerState<ShadowSelector>
+class _FontWeightSelectorState extends ConsumerState<FontWeightSelector>
     with SingleTickerProviderStateMixin {
   bool showModal = false;
   int _hoveredIndex = -1;
@@ -52,7 +53,7 @@ class _ShadowSelectorState extends ConsumerState<ShadowSelector>
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: 'Shadow'.txt(size: 12, color: grey400),
+          child: 'Font Weight'.txt(size: 12, color: grey400),
         ),
         PopUpOverlay(
           visible: showModal,
@@ -75,14 +76,15 @@ class _ShadowSelectorState extends ConsumerState<ShadowSelector>
                 mainAxisSize: MainAxisSize.min,
                 separatorBuilder: () => const Gap(5),
                 children: List.generate(
-                  ShadowPreset.values.length,
+                  FontWeightPreset.values.length,
                   (index) => Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 10,
                     ),
                     decoration: BoxDecoration(
-                      color: editorState.shadow == ShadowPreset.values[index] ||
+                      color: editorState.fontWeightPreset ==
+                                  FontWeightPreset.values[index] ||
                               _hoveredIndex == index
                           ? b200
                           : Colors.transparent,
@@ -91,11 +93,12 @@ class _ShadowSelectorState extends ConsumerState<ShadowSelector>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ShadowPreset.values[index].name.toCapitalized().txt(
+                        FontWeightPreset.values[index].name.toCapitalized().txt(
                               size: 16,
                               fontWeight: FontWeight.w500,
                             ),
-                        editorState.shadow == ShadowPreset.values[index]
+                        editorState.fontWeightPreset ==
+                                FontWeightPreset.values[index]
                             ? const Icon(
                                 PhosphorIconsBold.check,
                                 size: 20,
@@ -106,9 +109,9 @@ class _ShadowSelectorState extends ConsumerState<ShadowSelector>
                     ),
                   ).tap(
                     onTap: () {
-                      editorStateNotifier.changeShadow(
-                          newShadow: ShadowPreset.values[index]);
-                      // setState(() => showModal = false);
+                      editorStateNotifier.changeFontWeight(
+                          newFontWeight: FontWeightPreset.values[index]);
+                      setState(() => showModal = false);
                       if (showModal) {
                         _controller.forward();
                       } else {
@@ -144,7 +147,7 @@ class _ShadowSelectorState extends ConsumerState<ShadowSelector>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                editorState.shadow.name.toCapitalized().txt(),
+                editorState.fontWeightPreset.name.toCapitalized().txt(),
                 RotationTransition(
                   turns: _animation,
                   child: const Icon(

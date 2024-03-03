@@ -45,6 +45,17 @@ enum ShadowPreset {
   final double value;
 }
 
+enum PseudoButtonStyle { none, mac, win }
+
+enum FontWeightPreset {
+  regular(FontWeight.w400),
+  medium(FontWeight.w500),
+  bold(FontWeight.w600);
+
+  const FontWeightPreset(this.value);
+  final FontWeight value;
+}
+
 List<LinearGradient> backgroundGradients = [
   // Gradient 1
   LinearGradient(

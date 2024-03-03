@@ -14,6 +14,9 @@ class EditorStateNotifier extends Notifier<EditorState> {
         visible: true,
         backgroundColor: const Color(0xFF7e3bdf),
         shadow: ShadowPreset.none,
+        psButtonStyle: PseudoButtonStyle.mac,
+        fontWeightPreset: FontWeightPreset.regular,
+        waterMark: true,
       );
 
   void changePadding({required double newPadding}) {
@@ -49,6 +52,18 @@ class EditorStateNotifier extends Notifier<EditorState> {
   void changeShadow({required ShadowPreset newShadow}) {
     state = state.copyWith(shadow: newShadow);
   }
+
+  void changePseudoButtons({required PseudoButtonStyle newStyle}) {
+    state = state.copyWith(psButtonStyle: newStyle);
+  }
+
+  void changeFontWeight({required FontWeightPreset newFontWeight}) {
+    state = state.copyWith(fontWeightPreset: newFontWeight);
+  }
+
+  void toggleWaterMark() {
+    state = state.copyWith(waterMark: !state.waterMark);
+  }
 }
 
 class EditorState {
@@ -58,6 +73,9 @@ class EditorState {
   final Color backgroundColor;
   Gradient? backgroundGradient;
   final ShadowPreset shadow;
+  final PseudoButtonStyle psButtonStyle;
+  final FontWeightPreset fontWeightPreset;
+  final bool waterMark;
 
   EditorState({
     required this.padding,
@@ -66,6 +84,9 @@ class EditorState {
     required this.backgroundColor,
     this.backgroundGradient,
     required this.shadow,
+    required this.psButtonStyle,
+    required this.fontWeightPreset,
+    required this.waterMark,
   });
 
   EditorState copyWith({
@@ -75,6 +96,9 @@ class EditorState {
     Color? backgroundColor,
     Gradient? backgroundGradient,
     ShadowPreset? shadow,
+    PseudoButtonStyle? psButtonStyle,
+    FontWeightPreset? fontWeightPreset,
+    bool? waterMark,
   }) {
     return EditorState(
       padding: padding ?? this.padding,
@@ -83,13 +107,9 @@ class EditorState {
       backgroundColor: backgroundColor ?? this.backgroundColor,
       backgroundGradient: backgroundGradient ?? this.backgroundGradient,
       shadow: shadow ?? this.shadow,
+      psButtonStyle: psButtonStyle ?? this.psButtonStyle,
+      fontWeightPreset: fontWeightPreset ?? this.fontWeightPreset,
+      waterMark: waterMark ?? this.waterMark,
     );
   }
 }
-
-Gradient defaultGradient = const LinearGradient(
-  colors: [
-    Colors.purpleAccent,
-    Colors.pink,
-  ],
-);

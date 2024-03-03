@@ -1,6 +1,5 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
 import 'package:coded_shots/app/editor/widgets/code_view.dart';
-import 'package:coded_shots/shared/app_constants.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/theme/palette.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -17,7 +16,8 @@ class MainPanel extends ConsumerWidget {
 
     return Expanded(
       child: Container(
-        height: height(context),
+        // height: height(context),
+        // width: 200,
         decoration: const BoxDecoration(color: b100),
         child: SingleChildScrollView(
           child: SingleChildScrollView(
@@ -28,8 +28,8 @@ class MainPanel extends ConsumerWidget {
               // width: 400,
               padding: EdgeInsets.all(editorState.padding),
               margin: EdgeInsets.only(
-                top: 200.rH(context),
-                left: 270.rW(context),
+                // top: 200.rH(context),
+                left: 270.rW(context) - 50,
               ),
               decoration: BoxDecoration(
                 color: editorState.visible
@@ -38,9 +38,7 @@ class MainPanel extends ConsumerWidget {
                 gradient: editorState.backgroundGradient,
                 borderRadius: BorderRadius.circular(editorState.radius),
               ),
-              child: const Center(
-                child: CodeView()
-              ),
+              child: const Center(child: CodeView()),
             ),
           ),
         ),

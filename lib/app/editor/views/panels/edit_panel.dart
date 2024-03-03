@@ -1,15 +1,19 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
 import 'package:coded_shots/app/editor/widgets/background_color.dart';
+import 'package:coded_shots/app/editor/widgets/fontweight_selector.dart';
 import 'package:coded_shots/app/editor/widgets/padding_selector.dart';
+import 'package:coded_shots/app/editor/widgets/pseudo_button_style_selector.dart';
 import 'package:coded_shots/app/editor/widgets/radius_selector.dart';
 import 'package:coded_shots/app/editor/widgets/shadow_selector.dart';
 import 'package:coded_shots/app/editor/widgets/visibility_selector.dart';
+import 'package:coded_shots/app/editor/widgets/watermark_visibility.dart';
 import 'package:coded_shots/shared/app_constants.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/theme/palette.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class EditPanel extends ConsumerWidget {
   const EditPanel({super.key});
@@ -27,10 +31,18 @@ class EditPanel extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(10),
-            'Coded Shots'.txt(
-              size: 18,
-              fontWeight: FontWeight.w700,
+            Row(
+              children: [
+                const Icon(
+                  PhosphorIconsFill.penNib,
+                  size: 20,
+                  color: neutralWhite,
+                ),
+                const Gap(2),
+                'CodedShots'.txt(size: 18, fontWeight: FontWeight.w700),
+              ],
             ),
+
             const Gap(30),
 
             //! background edit
@@ -59,6 +71,11 @@ class EditPanel extends ConsumerWidget {
             const Gap(15),
             const ShadowSelector(),
             const Gap(10),
+            const PseudoButttonWindowSelector(),
+            const Gap(10),
+            const FontWeightSelector(),
+            const Gap(10),
+            const WaterMarkVisibilitySelector(),
           ],
         ),
       ),

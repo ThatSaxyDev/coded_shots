@@ -11,6 +11,7 @@ class EditorView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: b100,
       body: SizedBox(
         height: height(context),
         width: width(context),
@@ -21,9 +22,9 @@ class EditorView extends ConsumerWidget {
 
             //! style
             Container(
-              width: 250,
+              width: 270,
               height: height(context),
-              decoration: const BoxDecoration(color: b100),
+              decoration: const BoxDecoration(color: b200),
             )
           ],
         ),
