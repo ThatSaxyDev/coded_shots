@@ -28,7 +28,8 @@ class MainPanel extends ConsumerWidget {
               // width: 400,
               padding: EdgeInsets.all(editorState.padding),
               margin: EdgeInsets.only(
-                // top: 200.rH(context),
+                top: 50,
+                bottom: 50,
                 left: 270.rW(context) - 50,
               ),
               decoration: BoxDecoration(
