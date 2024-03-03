@@ -1,5 +1,4 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
-import 'package:coded_shots/app/editor/widgets/color_palette.dart';
 import 'package:coded_shots/app/editor/widgets/pop_up.dart';
 import 'package:coded_shots/data/editor_presets.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
