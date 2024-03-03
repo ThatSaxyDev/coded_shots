@@ -15,17 +15,17 @@ class EditorView extends ConsumerWidget {
       body: SizedBox(
         height: height(context),
         width: width(context),
-        child: Row(
+        child: const Row(
           children: [
-            const EditPanel(),
-            const MainPanel(),
+            EditPanel(),
+            MainPanel(),
 
             //! style
-            Container(
-              width: 270,
-              height: height(context),
-              decoration: const BoxDecoration(color: b200),
-            )
+            // Container(
+            //   width: 270,
+            //   height: height(context),
+            //   decoration: const BoxDecoration(color: b200),
+            // )
           ],
         ),
       ),

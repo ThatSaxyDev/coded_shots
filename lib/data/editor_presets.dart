@@ -1,3 +1,6 @@
+import 'package:coded_shots/app/editor/notifiers/editor_state_notifier.dart';
+import 'package:coded_shots/theme/palette.dart';
+import 'package:coded_shots/utils/highlighter.dart';
 import 'package:flutter/material.dart';
 
 List<double> paddings = [8, 16, 32, 64];
@@ -35,6 +38,44 @@ List<Color> backgroundColors = const [
   Color(0xFF06535d),
 ];
 
+List<ThemePreset> themePresets = [
+  ThemePreset(
+    style: SyntaxHighlighterStyle.lightThemeStyle(),
+    color: const Color(0xFFFFFFFF),
+    buttonColor: neutralBlack,
+  ),
+  ThemePreset(
+    style: SyntaxHighlighterStyle.darkThemeStyle(),
+    color: const Color(0xFF213043),
+    buttonColor: neutralWhite,
+  ),
+  ThemePreset(
+    style: SyntaxHighlighterStyle.darkThemeStyle(),
+    color: const Color(0xFF000000),
+    buttonColor: neutralWhite,
+  ),
+  ThemePreset(
+    style: SyntaxHighlighterStyle.lightThemeStyle(),
+    color: const Color(0xFFA2B1D2),
+    buttonColor: neutralBlack,
+  ),
+  ThemePreset(
+    style: SyntaxHighlighterStyle.darkThemeStyle(),
+    color: const Color(0xFF1a3f95),
+    buttonColor: neutralWhite,
+  ),
+  ThemePreset(
+    style: SyntaxHighlighterStyle.lightThemeStyle(),
+    color: const Color(0xFF64e7a3),
+    buttonColor: neutralBlack,
+  ),
+  ThemePreset(
+    style: SyntaxHighlighterStyle.lightThemeStyle(),
+    color: const Color(0xFFFF88AA),
+    buttonColor: neutralBlack,
+  ),
+];
+
 enum ShadowPreset {
   none(0),
   small(5),
@@ -54,6 +95,17 @@ enum FontWeightPreset {
 
   const FontWeightPreset(this.value);
   final FontWeight value;
+}
+
+enum FontFamilyPreset {
+  jetBrains('JetBrainsMono'),
+  sourceCode('SourceCodePro'),
+  overPass('OverpassMono'),
+  space('SpaceMono'),
+  anon('AnonymousPro');
+
+  const FontFamilyPreset(this.value);
+  final String value;
 }
 
 List<LinearGradient> backgroundGradients = [

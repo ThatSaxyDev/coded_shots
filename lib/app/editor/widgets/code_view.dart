@@ -30,7 +30,7 @@ class _CodeViewState extends ConsumerState<CodeView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     try {
-      getExampleCode('enum_preset', DefaultAssetBundle.of(context))
+      getExampleCode('pro', DefaultAssetBundle.of(context))
           .then<void>((String code) {
         if (mounted) {
           setState(() {
@@ -54,8 +54,8 @@ class _CodeViewState extends ConsumerState<CodeView> {
   @override
   Widget build(BuildContext context) {
     final editorState = ref.watch(editorNotifierProvider);
-    final SyntaxHighlighterStyle style =
-        SyntaxHighlighterStyle.lightThemeStyle();
+    // final SyntaxHighlighterStyle style =
+    //     SyntaxHighlighterStyle.lightThemeStyle();
     // final SyntaxHighlighterStyle style =
     //     Theme.of(context).brightness == Brightness.dark
     //         ? SyntaxHighlighterStyle.darkThemeStyle()
@@ -123,7 +123,7 @@ class _CodeViewState extends ConsumerState<CodeView> {
         // height: double.infinity,
         // width: double.infinity,
         decoration: BoxDecoration(
-          color: grey100,
+          color: editorState.themePreset.color,
           borderRadius: BorderRadius.circular(8),
           boxShadow: switch (editorState.shadow) {
             ShadowPreset.none => [],
@@ -166,17 +166,23 @@ class _CodeViewState extends ConsumerState<CodeView> {
                                     },
                                   ),
                                 PseudoButtonStyle.win => switch (index) {
-                                    0 => const Icon(
+                                    0 => Icon(
                                         PhosphorIconsBold.x,
                                         size: 14,
+                                        color:
+                                            editorState.themePreset.buttonColor,
                                       ),
-                                    1 => const Icon(
+                                    1 => Icon(
                                         PhosphorIconsBold.square,
                                         size: 14,
+                                        color:
+                                            editorState.themePreset.buttonColor,
                                       ),
-                                    _ => const Icon(
+                                    _ => Icon(
                                         PhosphorIconsBold.minus,
                                         size: 14,
+                                        color:
+                                            editorState.themePreset.buttonColor,
                                       ),
                                   },
                                 PseudoButtonStyle.none =>
@@ -200,11 +206,15 @@ class _CodeViewState extends ConsumerState<CodeView> {
                                 // textStyle:
                                 TextStyle(
                                     fontSize: 19,
+                                    fontFamily:
+                                        editorState.fontFamilyPreset.value,
                                     fontWeight:
                                         editorState.fontWeightPreset.value),
                             // ),
                             children: <TextSpan>[
-                              DartSyntaxHighlighter(style).format(codeText!)
+                              DartSyntaxHighlighter(
+                                      editorState.themePreset.style)
+                                  .format(codeText!)
                             ],
                           ),
                         ).fadeInFromTop(

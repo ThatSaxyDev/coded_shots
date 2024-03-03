@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:coded_shots/data/editor_presets.dart';
+import 'package:coded_shots/utils/highlighter.dart';
 
 class EditorStateNotifier extends Notifier<EditorState> {
   @override
@@ -17,6 +18,8 @@ class EditorStateNotifier extends Notifier<EditorState> {
         psButtonStyle: PseudoButtonStyle.mac,
         fontWeightPreset: FontWeightPreset.regular,
         waterMark: true,
+        fontFamilyPreset: FontFamilyPreset.jetBrains,
+        themePreset: themePresets[0],
       );
 
   void changePadding({required double newPadding}) {
@@ -64,6 +67,14 @@ class EditorStateNotifier extends Notifier<EditorState> {
   void toggleWaterMark() {
     state = state.copyWith(waterMark: !state.waterMark);
   }
+
+  void changeFontFamily({required FontFamilyPreset newFontFam}) {
+    state = state.copyWith(fontFamilyPreset: newFontFam);
+  }
+
+  void changeThemePreset({required ThemePreset newThemePreset}) {
+    state = state.copyWith(themePreset: newThemePreset);
+  }
 }
 
 class EditorState {
@@ -76,6 +87,8 @@ class EditorState {
   final PseudoButtonStyle psButtonStyle;
   final FontWeightPreset fontWeightPreset;
   final bool waterMark;
+  final FontFamilyPreset fontFamilyPreset;
+  final ThemePreset themePreset;
 
   EditorState({
     required this.padding,
@@ -87,6 +100,8 @@ class EditorState {
     required this.psButtonStyle,
     required this.fontWeightPreset,
     required this.waterMark,
+    required this.fontFamilyPreset,
+    required this.themePreset,
   });
 
   EditorState copyWith({
@@ -99,6 +114,8 @@ class EditorState {
     PseudoButtonStyle? psButtonStyle,
     FontWeightPreset? fontWeightPreset,
     bool? waterMark,
+    FontFamilyPreset? fontFamilyPreset,
+    ThemePreset? themePreset,
   }) {
     return EditorState(
       padding: padding ?? this.padding,
@@ -110,6 +127,32 @@ class EditorState {
       psButtonStyle: psButtonStyle ?? this.psButtonStyle,
       fontWeightPreset: fontWeightPreset ?? this.fontWeightPreset,
       waterMark: waterMark ?? this.waterMark,
+      fontFamilyPreset: fontFamilyPreset ?? this.fontFamilyPreset,
+      themePreset: themePreset ?? this.themePreset,
+    );
+  }
+}
+
+class ThemePreset {
+  final SyntaxHighlighterStyle style;
+  final Color color;
+  final Color buttonColor;
+
+  ThemePreset({
+    required this.style,
+    required this.color,
+    required this.buttonColor,
+  });
+
+  ThemePreset copyWith({
+    SyntaxHighlighterStyle? style,
+    Color? color,
+    Color? buttonColor,
+  }) {
+    return ThemePreset(
+      style: style ?? this.style,
+      color: color ?? this.color,
+      buttonColor: buttonColor ?? this.buttonColor,
     );
   }
 }
