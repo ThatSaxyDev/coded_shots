@@ -1,10 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, use_build_context_synchronously
+import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
+import 'package:coded_shots/utils/banner.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widgets_to_image/widgets_to_image.dart';
 
 import 'package:coded_shots/data/editor_presets.dart';
+import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/utils/highlighter.dart';
 
 class EditorStateNotifier extends Notifier<EditorState> {
@@ -21,6 +28,8 @@ class EditorStateNotifier extends Notifier<EditorState> {
         fontFamilyPreset: FontFamilyPreset.jetBrains,
         themePreset: themePresets[0],
       );
+
+  WidgetsToImageController widgetToImageController = WidgetsToImageController();
 
   void changePadding({required double newPadding}) {
     state = state.copyWith(padding: newPadding);
@@ -75,6 +84,76 @@ class EditorStateNotifier extends Notifier<EditorState> {
   void changeThemePreset({required ThemePreset newThemePreset}) {
     state = state.copyWith(themePreset: newThemePreset);
   }
+
+  // void setExportBytes({required Uint8List exportBytes}) {
+  //   state = state.copyWith(exportBytes: exportBytes);
+  //   // exportImage();
+  // }
+
+  // void exportImage() async {
+  //   // final directory = (await getApplicationDocumentsDirectory()).path;
+  //   // directory.log();
+  //   // if (state.exportBytes == null) {
+  //   //   'no image bytes'.log();
+  //   //   return;
+  //   // }
+
+  //   // File imageFile = File('$directory/codedshots_${DateTime.now()}.png');
+  //   // imageFile.writeAsBytes(state.exportBytes!);
+
+  //   // state = state.copyWith(
+  //   //   imageFile: imageFile,
+  //   // );
+
+  //   // state.imageFile!.path.log();
+
+  //   String path = await FileSaver.instance.saveFile(
+  //     name: 'codedshots_${DateTime.now()}',
+  //     bytes: state.exportBytes!,
+  //     ext: 'png',
+  //     mimeType: MimeType.png,
+  //   );
+
+  //   path.log();
+  // }
+
+  void exportImageByBytes({
+    required Uint8List exportBytes,
+    required BuildContext context,
+  }) async {
+    // final directory = (await getApplicationDocumentsDirectory()).path;
+    // directory.log();
+    // if (state.exportBytes == null) {
+    //   'no image bytes'.log();
+    //   return;
+    // }
+
+    // File imageFile = File('$directory/codedshots_${DateTime.now()}.png');
+    // imageFile.writeAsBytes(state.exportBytes!);
+
+    // state = state.copyWith(
+    //   imageFile: imageFile,
+    // );
+
+    // state.imageFile!.path.log();
+
+    String path = await FileSaver.instance.saveFile(
+      name: 'codedshots_${DateTime.now()}',
+      bytes: exportBytes,
+      ext: 'png',
+      mimeType: MimeType.png,
+    );
+    path.log();
+    showBanner(
+        context: context,
+        theMessage: 'Code snippet saved to downloads',
+        theType: NotificationType.success);
+  }
+
+  // void removeExportBytes() {
+  //   state.exportBytes = null;
+  //   state = state.copyWith();
+  // }
 }
 
 class EditorState {
@@ -89,6 +168,8 @@ class EditorState {
   final bool waterMark;
   final FontFamilyPreset fontFamilyPreset;
   final ThemePreset themePreset;
+  Uint8List? exportBytes;
+  File? imageFile;
 
   EditorState({
     required this.padding,
@@ -102,6 +183,8 @@ class EditorState {
     required this.waterMark,
     required this.fontFamilyPreset,
     required this.themePreset,
+    this.exportBytes,
+    this.imageFile,
   });
 
   EditorState copyWith({
@@ -116,6 +199,8 @@ class EditorState {
     bool? waterMark,
     FontFamilyPreset? fontFamilyPreset,
     ThemePreset? themePreset,
+    Uint8List? exportBytes,
+    File? imageFile,
   }) {
     return EditorState(
       padding: padding ?? this.padding,
@@ -129,6 +214,8 @@ class EditorState {
       waterMark: waterMark ?? this.waterMark,
       fontFamilyPreset: fontFamilyPreset ?? this.fontFamilyPreset,
       themePreset: themePreset ?? this.themePreset,
+      exportBytes: exportBytes ?? this.exportBytes,
+      imageFile: imageFile ?? this.imageFile,
     );
   }
 }

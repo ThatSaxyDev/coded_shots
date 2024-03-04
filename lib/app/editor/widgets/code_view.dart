@@ -1,5 +1,4 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
-import 'package:coded_shots/app/editor/widgets/pop_up.dart';
 import 'package:coded_shots/data/editor_presets.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/theme/palette.dart';
@@ -54,208 +53,179 @@ class _CodeViewState extends ConsumerState<CodeView> {
   @override
   Widget build(BuildContext context) {
     final editorState = ref.watch(editorNotifierProvider);
-    // final SyntaxHighlighterStyle style =
-    //     SyntaxHighlighterStyle.lightThemeStyle();
-    // final SyntaxHighlighterStyle style =
-    //     Theme.of(context).brightness == Brightness.dark
-    //         ? SyntaxHighlighterStyle.darkThemeStyle()
-    //         : SyntaxHighlighterStyle.lightThemeStyle();
 
     if (codeText == null) {
       return const Center(child: CircularProgressIndicator());
     }
-    return PopUpOverlay(
-      visible: showModal,
-      follower: Alignment.topCenter,
-      target: Alignment.bottomCenter,
-      modal: Material(
-        elevation: 8,
-        color: Colors.transparent,
-        child: Container(
-          margin: const EdgeInsets.only(top: 10),
-          // height: 400,
-          width: 100,
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-          decoration: BoxDecoration(
-            color: b100,
-            border: Border.all(width: 1, color: grey600),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 5,
-            ),
-            decoration: BoxDecoration(
-              color: onHover ? b200 : Colors.transparent,
-              borderRadius: BorderRadius.circular(7),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(
-                  PhosphorIconsBold.penNib,
-                  size: 18,
-                  color: grey400,
-                ),
-                const Gap(2),
-                'Paste'.txt(size: 16),
-              ],
-            ),
-          ).tap(
-            onTap: () {
-              setState(() => showModal = false);
-              setCodeText();
-            },
-            onHover: (isHovered) {
-              setState(() {
-                onHover = isHovered;
-              });
-            },
-          ),
-        ),
-      ),
-      onClose: () {
-        setState(() => showModal = false);
-      },
-      child: AnimatedContainer(
-        duration: 300.ms,
-        // height: double.infinity,
-        // width: double.infinity,
-        decoration: BoxDecoration(
-          color: editorState.themePreset.color,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: switch (editorState.shadow) {
-            ShadowPreset.none => [],
-            _ => [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  spreadRadius: editorState.shadow.value,
-                  blurRadius: editorState.shadow.value,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-          },
-        ),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //! header
-                editorState.psButtonStyle == PseudoButtonStyle.none
-                    ? const Gap(20)
-                    : Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: SizedBox(
-                          height: 40,
-                          width: 500,
-                          child: SeparatedRow(
-                            // mainAxisAlignment: MainAxisAlignment.start,
-                            separatorBuilder: () => const Gap(7),
-                            children: List.generate(
-                              3,
-                              (index) => switch (editorState.psButtonStyle) {
-                                PseudoButtonStyle.mac => CircleAvatar(
-                                    radius: 7,
-                                    backgroundColor: switch (index) {
-                                      0 => const Color.fromRGBO(254, 98, 88, 1),
-                                      1 =>
-                                        const Color.fromRGBO(251, 186, 64, 1),
-                                      _ => const Color.fromRGBO(35, 194, 75, 1),
-                                    },
-                                  ),
-                                PseudoButtonStyle.win => switch (index) {
-                                    0 => Icon(
-                                        PhosphorIconsBold.x,
-                                        size: 14,
-                                        color:
-                                            editorState.themePreset.buttonColor,
-                                      ),
-                                    1 => Icon(
-                                        PhosphorIconsBold.square,
-                                        size: 14,
-                                        color:
-                                            editorState.themePreset.buttonColor,
-                                      ),
-                                    _ => Icon(
-                                        PhosphorIconsBold.minus,
-                                        size: 14,
-                                        color:
-                                            editorState.themePreset.buttonColor,
-                                      ),
-                                  },
-                                PseudoButtonStyle.none =>
-                                  const SizedBox.shrink(),
-                              },
-                            ),
-                          ),
-                        ).alignCenterLeft(),
-                      ),
-
-                codeText == null
-                    ? const Center(child: CircularProgressIndicator())
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30)
-                            .copyWith(top: 15, bottom: 40),
-                        child: RichText(
-                          textAlign: TextAlign.start,
-                          text: TextSpan(
-                            style:
-                                // GoogleFonts.firaCode(
-                                // textStyle:
-                                TextStyle(
-                                    fontSize: 19,
-                                    fontFamily:
-                                        editorState.fontFamilyPreset.value,
-                                    fontWeight:
-                                        editorState.fontWeightPreset.value),
-                            // ),
-                            children: <TextSpan>[
-                              DartSyntaxHighlighter(
-                                      editorState.themePreset.style)
-                                  .format(codeText!)
-                            ],
-                          ),
-                        ).fadeInFromTop(
-                          delay: 0.ms,
-                          animatiomDuration: 200.ms,
-                        ),
-                      ),
-              ],
-            ),
-            if (editorState.waterMark)
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: Row(
-                  children: [
-                    const Icon(
-                      PhosphorIconsBold.penNib,
-                      size: 18,
-                      color: grey400,
-                    ),
-                    const Gap(2),
-                    'CodedShots'.txt(
-                        size: 16, fontWeight: FontWeight.w700, color: grey400),
-                  ],
-                ).fadeInFromBottom(
-                  delay: 0.ms,
-                  animatiomDuration: 200.ms,
-                ),
+    return AnimatedContainer(
+      duration: 300.ms,
+      // height: double.infinity,
+      // width: double.infinity,
+      decoration: BoxDecoration(
+        color: editorState.themePreset.color,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: switch (editorState.shadow) {
+          ShadowPreset.none => [],
+          _ => [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                spreadRadius: editorState.shadow.value,
+                blurRadius: editorState.shadow.value,
+                offset: const Offset(0, 3),
               ),
-          ],
-        ),
-      ).tap(
-        onTap: () {
-          // setState(() => showModal = false);
-        },
-        onHover: (isHovered) {
-          setState(() {
-            showModal = true;
-          });
+            ],
         },
       ),
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //! header
+              editorState.psButtonStyle == PseudoButtonStyle.none
+                  ? const Gap(20)
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: SizedBox(
+                        height: 40,
+                        width: 500,
+                        child: Row(
+                          children: [
+                            SeparatedRow(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              separatorBuilder: () => const Gap(7),
+                              children: List.generate(
+                                3,
+                                (index) => switch (editorState.psButtonStyle) {
+                                  PseudoButtonStyle.mac => CircleAvatar(
+                                      radius: 7,
+                                      backgroundColor: switch (index) {
+                                        0 =>
+                                          const Color.fromRGBO(254, 98, 88, 1),
+                                        1 =>
+                                          const Color.fromRGBO(251, 186, 64, 1),
+                                        _ =>
+                                          const Color.fromRGBO(35, 194, 75, 1),
+                                      },
+                                    ),
+                                  PseudoButtonStyle.win => switch (index) {
+                                      0 => Icon(
+                                          PhosphorIconsBold.x,
+                                          size: 14,
+                                          color: editorState
+                                              .themePreset.buttonColor,
+                                        ),
+                                      1 => Icon(
+                                          PhosphorIconsBold.square,
+                                          size: 14,
+                                          color: editorState
+                                              .themePreset.buttonColor,
+                                        ),
+                                      _ => Icon(
+                                          PhosphorIconsBold.minus,
+                                          size: 14,
+                                          color: editorState
+                                              .themePreset.buttonColor,
+                                        ),
+                                    },
+                                  PseudoButtonStyle.none =>
+                                    const SizedBox.shrink(),
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ).alignCenterLeft(),
+                    ),
+
+              codeText == null
+                  ? const Center(child: CircularProgressIndicator())
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30)
+                          .copyWith(top: 15, bottom: 40),
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          style:
+                              // GoogleFonts.firaCode(
+                              // textStyle:
+                              TextStyle(
+                                  fontSize: 19,
+                                  fontFamily:
+                                      editorState.fontFamilyPreset.value,
+                                  fontWeight:
+                                      editorState.fontWeightPreset.value),
+                          // ),
+                          children: <TextSpan>[
+                            DartSyntaxHighlighter(editorState.themePreset.style)
+                                .format(codeText!)
+                          ],
+                        ),
+                      ).fadeInFromTop(
+                        delay: 0.ms,
+                        animatiomDuration: 200.ms,
+                      ),
+                    ),
+            ],
+          ),
+          if (onHover)
+            Positioned(
+                right: 4,
+                top: 5,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: editorState.visible
+                        ? editorState.backgroundColor
+                        : Colors.transparent,
+                    gradient: editorState.backgroundGradient,
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: 'Click to paste'.txt(
+                    fontWeight: FontWeight.w500,
+                    fontStyle: FontStyle.italic,
+                    color: neutralWhite,
+                  ),
+                ).tap(
+                  onTap: () {
+                    setCodeText();
+                  },
+                )).fadeInFromTop(
+              delay: 0.ms,
+              animatiomDuration: 100.ms,
+            ),
+          if (editorState.waterMark)
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: Row(
+                children: [
+                  const Icon(
+                    PhosphorIconsBold.penNib,
+                    size: 18,
+                    color: grey400,
+                  ),
+                  const Gap(2),
+                  'CodedShots'.txt(
+                      size: 16, fontWeight: FontWeight.w700, color: grey400),
+                ],
+              ).fadeInFromBottom(
+                delay: 0.ms,
+                animatiomDuration: 200.ms,
+              ),
+            ),
+        ],
+      ),
+    ).tap(
+      onTap: () {
+        setCodeText();
+      },
+      onHover: (isHovered) {
+        setState(() {
+          onHover = isHovered;
+        });
+      },
     );
   }
 }
