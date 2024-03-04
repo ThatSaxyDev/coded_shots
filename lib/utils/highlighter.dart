@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:coded_shots/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:string_scanner/string_scanner.dart';
 
@@ -15,30 +16,49 @@ class SyntaxHighlighterStyle {
     required this.punctuationStyle,
     required this.classStyle,
     required this.constantStyle,
+    required this.boolStyle,
   });
 
   static SyntaxHighlighterStyle lightThemeStyle() {
     return SyntaxHighlighterStyle(
-        baseStyle: const TextStyle(color: Color(0xFF000000)),
-        numberStyle: const TextStyle(color: Color(0xFF1565C0)),
-        commentStyle: const TextStyle(color: Color(0xFF9E9E9E)),
-        keywordStyle: const TextStyle(color: Color(0xFF9C27B0)),
-        stringStyle: const TextStyle(color: Color(0xFF43A047)),
-        punctuationStyle: const TextStyle(color: Color(0xFF000000)),
-        classStyle: const TextStyle(color: Color(0xFF512DA8)),
-        constantStyle: const TextStyle(color: Color(0xFF795548)));
+      baseStyle: const TextStyle(color: grey600),
+      numberStyle: const TextStyle(color: Color(0xFF1565C0)),
+      commentStyle: const TextStyle(color: Color(0xFF9E9E9E)),
+      keywordStyle: const TextStyle(color: Color(0xFF6A1B9A)),
+      stringStyle: const TextStyle(color: Color(0xFF43A047)),
+      punctuationStyle: const TextStyle(color: Color(0xFF795548)),
+      classStyle: TextStyle(color: Colors.blue.shade800),
+      constantStyle: const TextStyle(color: Color(0xFF795548)),
+      boolStyle: const TextStyle(color: Color(0xFF795548)),
+    );
   }
+
+  // static SyntaxHighlighterStyle darkThemeStyle() {
+  //   return SyntaxHighlighterStyle(
+  //     baseStyle: const TextStyle(color: Color(0xFFFFFFFF)),
+  //     numberStyle: const TextStyle(color: Color(0xFF1565C0)),
+  //     commentStyle: const TextStyle(color: Color(0xFF9E9E9E)),
+  //     keywordStyle: const TextStyle(color: Color(0xFF80CBC4)),
+  //     stringStyle: const TextStyle(color: Color(0xFF009688)),
+  //     punctuationStyle: const TextStyle(color: Color(0xFFFFFFFF)),
+  //     classStyle: const TextStyle(color: Color(0xFF009688)),
+  //     constantStyle: const TextStyle(color: Color(0xFF795548)),
+  //     boolStyle: const TextStyle(color: Color(0xFF80CBC4)),
+  //   );
+  // }
 
   static SyntaxHighlighterStyle darkThemeStyle() {
     return SyntaxHighlighterStyle(
-        baseStyle: const TextStyle(color: Color(0xFFFFFFFF)),
-        numberStyle: const TextStyle(color: Color(0xFF1565C0)),
-        commentStyle: const TextStyle(color: Color(0xFF9E9E9E)),
-        keywordStyle: const TextStyle(color: Color(0xFF80CBC4)),
-        stringStyle: const TextStyle(color: Color(0xFF009688)),
-        punctuationStyle: const TextStyle(color: Color(0xFFFFFFFF)),
-        classStyle: const TextStyle(color: Color(0xFF009688)),
-        constantStyle: const TextStyle(color: Color(0xFF795548)));
+      baseStyle: const TextStyle(color: Color(0xFFFFFDD0)),
+      numberStyle: const TextStyle(color: Color(0xFF64FFDA)), // Vibrant cyan
+      commentStyle: const TextStyle(color: Color(0xFFB2B2B2)), // Light grey
+      keywordStyle: const TextStyle(color: Color(0xFFCE93D8)), // Vibrant pink
+      stringStyle: const TextStyle(color: Color(0xFFFFD740)), // Vibrant yellow
+      punctuationStyle: const TextStyle(color: Color(0xFFFFAB40)),
+      classStyle: const TextStyle(color: Colors.blue), // Vibrant orange
+      constantStyle: const TextStyle(color: Color(0xFF80CBC4)), // Teal
+      boolStyle: const TextStyle(color: Color(0xFF80CBC4)),
+    );
   }
 
   final TextStyle baseStyle;
@@ -49,6 +69,7 @@ class SyntaxHighlighterStyle {
   final TextStyle punctuationStyle;
   final TextStyle classStyle;
   final TextStyle constantStyle;
+  final TextStyle boolStyle;
 }
 
 abstract class SyntaxHighlighter {
@@ -85,7 +106,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
     'external',
     'extends',
     'factory',
-    'false',
+    // 'false',
     'final',
     'finally',
     'for',
@@ -109,7 +130,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
     'sync',
     'this',
     'throw',
-    'true',
+    // 'true',
     'try',
     'typedef',
     'var',
@@ -123,7 +144,14 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
     'int',
     'double',
     'num',
-    'bool'
+    'bool',
+    'String',
+    'notifier',
+  ];
+
+  static const List<String> _boolTypes = <String>[
+    'true',
+    'false',
   ];
 
   String _src = '';
@@ -287,6 +315,8 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
             word.startsWith('k') &&
             _firstLetterIsUpperCase(word.substring(1))) {
           type = _HighlightType.constant;
+        } else if (_boolTypes.contains(word)) {
+          type = _HighlightType.boolish;
         }
 
         if (type != null) {
@@ -334,7 +364,8 @@ enum _HighlightType {
   string,
   punctuation,
   klass,
-  constant
+  constant,
+  boolish,
 }
 
 class _HighlightSpan {
@@ -362,6 +393,8 @@ class _HighlightSpan {
       return style.classStyle;
     } else if (type == _HighlightType.constant) {
       return style.constantStyle;
+    } else if (type == _HighlightType.boolish) {
+      return style.boolStyle;
     } else {
       return style.baseStyle;
     }

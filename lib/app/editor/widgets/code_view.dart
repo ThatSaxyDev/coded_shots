@@ -52,6 +52,7 @@ class _CodeViewState extends ConsumerState<CodeView> {
 
   @override
   Widget build(BuildContext context) {
+    final paste = true.notifier;
     final editorState = ref.watch(editorNotifierProvider);
 
     if (codeText == null) {
