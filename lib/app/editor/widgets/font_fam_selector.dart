@@ -156,7 +156,7 @@ class _FontFamSelectorState extends ConsumerState<FontFamSelector>
                 RotationTransition(
                   turns: _animation,
                   child: const Icon(
-                    Icons.arrow_drop_down_rounded,
+                    Icons.arrow_right_rounded,
                     size: 24,
                     color: neutralWhite,
                   ),
