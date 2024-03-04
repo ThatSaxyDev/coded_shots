@@ -176,10 +176,7 @@ class _CodeViewState extends ConsumerState<CodeView> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                   decoration: BoxDecoration(
-                    color: editorState.visible
-                        ? editorState.backgroundColor
-                        : Colors.transparent,
-                    gradient: editorState.backgroundGradient,
+                    color: neutralBlack.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(9),
                   ),
                   child: 'Click to paste'.txt(
@@ -208,7 +205,10 @@ class _CodeViewState extends ConsumerState<CodeView> {
                   ),
                   const Gap(2),
                   'CodedShots'.txt(
-                      size: 16, fontWeight: FontWeight.w700, color: grey400),
+                    size: 16,
+                    fontWeight: FontWeight.w700,
+                    color: grey400,
+                  ),
                 ],
               ).fadeInFromBottom(
                 delay: 0.ms,
