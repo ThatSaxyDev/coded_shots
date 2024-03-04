@@ -1,3 +1,4 @@
+import 'package:coded_shots/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 
@@ -25,7 +26,7 @@ class PopUpOverlay extends StatelessWidget {
       visible: visible,
       onClose: onClose,
       child: PortalTarget(
-        anchor:  Aligned(
+        anchor: Aligned(
           follower: follower,
           target: target,
         ),
@@ -76,9 +77,7 @@ class Barrier extends StatelessWidget {
           duration: kThemeAnimationDuration,
           tween: ColorTween(
             begin: Colors.transparent,
-            end: 
-            // visible ? Colors.black12 :
-             Colors.transparent,
+            end: visible ? neutralBlack.withOpacity(0.15) : Colors.transparent,
           ),
           builder: (context, color, child) {
             return ColoredBox(color: color);

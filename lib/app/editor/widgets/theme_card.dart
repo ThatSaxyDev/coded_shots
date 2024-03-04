@@ -22,7 +22,7 @@ class ThemeCard extends ConsumerStatefulWidget {
 }
 
 class _ThemeCardState extends ConsumerState<ThemeCard> {
-  String? codeText;
+  String codeText = '';
   int _hoveredIndex = -1;
 
   @override
@@ -91,7 +91,7 @@ class _ThemeCardState extends ConsumerState<ThemeCard> {
                       // ),
                       children: <TextSpan>[
                         DartSyntaxHighlighter(widget.themePreset.style)
-                            .format(codeText!)
+                            .format(codeText)
                       ],
                     ),
                   ).fadeInFromTop(
