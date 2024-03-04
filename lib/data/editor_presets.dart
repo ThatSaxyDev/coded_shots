@@ -69,11 +69,11 @@ List<ThemePreset> themePresets = [
     color: const Color(0xFF64e7a3),
     buttonColor: neutralBlack,
   ),
-  ThemePreset(
-    style: SyntaxHighlighterStyle.lightThemeStyle(),
-    color: const Color(0xFFFF88AA),
-    buttonColor: neutralBlack,
-  ),
+  // ThemePreset(
+  //   style: SyntaxHighlighterStyle.lightThemeStyle(),
+  //   color: const Color(0xFFFF88AA),
+  //   buttonColor: neutralBlack,
+  // ),
 ];
 
 enum ShadowPreset {

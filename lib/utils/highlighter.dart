@@ -26,7 +26,7 @@ class SyntaxHighlighterStyle {
       commentStyle: const TextStyle(color: Color(0xFF9E9E9E)),
       keywordStyle: const TextStyle(color: Color(0xFF6A1B9A)),
       stringStyle: const TextStyle(color: Color(0xFF43A047)),
-      punctuationStyle: const TextStyle(color: Color(0xFF795548)),
+      punctuationStyle: const TextStyle(color: Color(0xFFB07F00)),
       classStyle: TextStyle(color: Colors.blue.shade800),
       constantStyle: const TextStyle(color: Color(0xFF795548)),
       boolStyle: const TextStyle(color: Color(0xFF795548)),
