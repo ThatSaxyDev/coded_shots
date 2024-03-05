@@ -52,8 +52,9 @@ class EditorView extends ConsumerWidget {
                   vertical: 7,
                 ),
                 decoration: BoxDecoration(
-                  color: editorState.backgroundColor,
-                  gradient: editorState.backgroundGradient,
+                  color: const Color(0xFF7e3bdf),
+                  // color: editorState.backgroundColor,
+                  // gradient: editorState.backgroundGradient,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Row(
