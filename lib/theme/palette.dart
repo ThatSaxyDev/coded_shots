@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 const neutralWhite = Color(0xffFFFFFF);
 const neutralBlack = Color(0xff000000);
-const b100 = Color.fromRGBO(23, 23, 23, 1);
-const b200 = Color.fromRGBO(30, 30, 30, 1);
+const b100 = Color(0xFF171717);
+const b200 = Color(0xFF1E1E1E);
 
 //! greys
 const grey100 = Color(0xFFF2F4F7);

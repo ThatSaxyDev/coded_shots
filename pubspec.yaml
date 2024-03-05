@@ -36,6 +36,9 @@ dependencies:
   path_provider: ^2.1.2
   file_saver: ^0.2.11
 
+dependency_overrides:
+  web: ^0.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

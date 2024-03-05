@@ -1,5 +1,6 @@
 import 'package:coded_shots/app/editor/views/editor_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,6 +27,8 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: const EditorView(),
       ),
-    );
+    ).animate().fadeIn(
+          duration: 400.ms,
+        );
   }
 }
