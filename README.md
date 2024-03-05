@@ -1,3 +1,3 @@
-# coded_shots
+# Coded Shots
 
-A new Flutter project.
+Capture and Share Code Snippets Effortlessly.
