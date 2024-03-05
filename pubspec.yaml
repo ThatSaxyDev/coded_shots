@@ -28,13 +28,14 @@ dependencies:
   uuid: ^4.3.3
   responsive_builder: ^0.7.0
   flutter_screenutil: ^5.9.0
-  cool_dropdown: ^2.1.0
   gap: ^3.0.1
   flutter_portal: ^1.1.4
   string_scanner: ^1.2.0
   widgets_to_image: ^0.0.2
   path_provider: ^2.1.2
   file_saver: ^0.2.11
+  web_smooth_scroll: ^1.1.0
+  simple_platform: ^1.0.1
 
 dependency_overrides:
   web: ^0.4.0
