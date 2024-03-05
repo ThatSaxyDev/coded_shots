@@ -12,3 +12,8 @@ Capture and Share Code Snippets Effortlessly.
 * Web App - https://codedshots.netlify.app/
 * MacOs App - https://drive.google.com/file/d/14jPDgBF9dXpiohd1DjOQ5A9fmItF6wmU/view?usp=drive_link
 
+## Screenshots
+
+![](https://github.com/ThatSaxyDev/coded_shots/blob/main/screenshots/code.png)
+
+![](https://github.com/ThatSaxyDev/coded_shots/blob/main/screenshots/app.png)
