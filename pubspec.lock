@@ -97,14 +97,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  cool_dropdown:
-    dependency: "direct main"
-    description:
-      name: cool_dropdown
-      sha256: "24400f57740b4779407586121e014bef241699ad2a52c506a7e1e7616cb68653"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   crypto:
     dependency: transitive
     description:
@@ -560,6 +552,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  simple_platform:
+    dependency: "direct main"
+    description:
+      name: simple_platform
+      sha256: "9692505720fc5d4cce6e60a79b444dde4599469d485c1611b42a578c30ff7d2c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   skeletonizer:
     dependency: "direct main"
     description:
@@ -694,13 +694,21 @@ packages:
     source: hosted
     version: "13.0.0"
   web:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: web
-      sha256: afe077240a270dcfd2aafe77602b4113645af95d0ad31128cc02bce5ac5d5152
+      sha256: "4188706108906f002b3a293509234588823c8c979dc83304e229ff400c996b05"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.4.2"
+  web_smooth_scroll:
+    dependency: "direct main"
+    description:
+      name: web_smooth_scroll
+      sha256: "2a4adc22e42e4045f02ecc1598885bf46adbe7ed9b05aab0a0f5df9ed071e9b6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   widgets_to_image:
     dependency: "direct main"
     description:
