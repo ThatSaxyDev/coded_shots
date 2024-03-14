@@ -36,9 +36,10 @@ dependencies:
   file_saver: ^0.2.11
   web_smooth_scroll: ^1.1.0
   simple_platform: ^1.0.1
+  url_launcher: ^6.2.5
 
 dependency_overrides:
-  web: ^0.4.0
+  web: ^0.5.0
 
 dev_dependencies:
   flutter_test:

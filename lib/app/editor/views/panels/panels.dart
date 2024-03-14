@@ -13,7 +13,6 @@ import 'package:coded_shots/data/editor_presets.dart';
 import 'package:coded_shots/shared/extensions/extensions.dart';
 import 'package:coded_shots/theme/palette.dart';
 import 'package:flextras/flextras.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -30,10 +29,8 @@ class Panel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final editorState = ref.watch(editorNotifierProvider);
     return SingleChildScrollView(
-      physics: kIsWeb
-          ? const NeverScrollableScrollPhysics()
-          : const BouncingScrollPhysics(),
-      controller: kIsWeb ? scrollController : null,
+      physics: const BouncingScrollPhysics(),
+      controller: null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

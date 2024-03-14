@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:simple_platform/simple_platform.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EditorView extends ConsumerWidget {
   const EditorView({super.key});
@@ -114,7 +115,10 @@ class EditorView extends ConsumerWidget {
                                 : neutralWhite,
                           ),
                         ],
-                      ),
+                      ).tap(onTap: () {
+                        launchURL(
+                            'https://drive.google.com/file/d/14jPDgBF9dXpiohd1DjOQ5A9fmItF6wmU/view?usp=drive_link');
+                      }),
                     ),
                 ],
               ),
@@ -147,5 +151,15 @@ class EditorView extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> launchURL(String url) async {
+  final Uri uri = Uri.parse(url);
+  if (!await launchUrl(
+    uri,
+    // mode: LaunchMode.externalApplication,
+  )) {
+    throw "Can not launch url";
   }
 }

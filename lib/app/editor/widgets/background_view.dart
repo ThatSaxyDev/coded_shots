@@ -1,18 +1,13 @@
 import 'package:coded_shots/app/editor/providers/editor_providers.dart';
 import 'package:coded_shots/app/editor/widgets/code_view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets_to_image/widgets_to_image.dart';
 
 class BackgroundView extends ConsumerWidget {
-  final ScrollController? vertScrollController;
-  final ScrollController? horScrollController;
   const BackgroundView({
     super.key,
-    this.vertScrollController,
-    this.horScrollController,
   });
 
   @override
@@ -20,16 +15,12 @@ class BackgroundView extends ConsumerWidget {
     final editorState = ref.watch(editorNotifierProvider);
     final editorStateNotifier = ref.read(editorNotifierProvider.notifier);
     return SingleChildScrollView(
-      controller: kIsWeb ? vertScrollController : null,
-      physics: kIsWeb
-          ? const NeverScrollableScrollPhysics()
-          : const BouncingScrollPhysics(),
+      controller: null,
+      physics: const BouncingScrollPhysics(),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        physics: kIsWeb
-            ? const NeverScrollableScrollPhysics()
-            : const BouncingScrollPhysics(),
-        controller: kIsWeb ? horScrollController : null,
+        physics: const BouncingScrollPhysics(),
+        controller: null,
         child: WidgetsToImage(
           controller: editorStateNotifier.widgetToImageController,
           child:
